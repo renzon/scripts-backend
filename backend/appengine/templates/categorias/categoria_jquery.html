@@ -1,0 +1,46 @@
+{% extends 'categorias/categoria_base.html' %}
+{% block js %}
+  <script type="application/javascript">
+
+    $(document).ready(function () {
+      var $wellForm = $('#well-form');
+      $('#form-categoria').submit(function(evento){
+        evento.preventDefault();
+        console.log('Executou');
+      });
+{#      $wellForm.hide();#}
+      $('#botao-mostrar-form').click(function(){
+        $wellForm.slideToggle();
+      });
+    });
+  </script>
+
+{% endblock %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Crud com Jquery </h1>
+        <button id="botao-mostrar-form" class="btn btn-success">Criar Nova Categoria</button>
+        <div id="well-form" class="well">
+          <h1 class="text-center">Categoria Form</h1>
+
+          <form id="form-categoria" action="#" role="form">
+
+            <div class="form-group ">
+              <label for="codigoInput" class="control-label">Codigo </label>
+              <input id="codigoInput" type="text" class="form-control" name="codigo" value="">
+            </div>
+
+            <div class="form-group ">
+              <label for="nomeInput" class="control-label">Nome </label>
+              <input id="nomeInput" type="text" class="form-control" name="nome" value="">
+            </div>
+
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
