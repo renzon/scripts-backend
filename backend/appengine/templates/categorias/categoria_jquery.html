@@ -4,12 +4,24 @@
 
     $(document).ready(function () {
       var $wellForm = $('#well-form');
-      $('#form-categoria').submit(function(evento){
+      var $formCategoria = $('#form-categoria');
+      var $formInputs = $formCategoria.find('input');
+
+      {#      console.log($formInputs);#}
+      $formCategoria.submit(function (evento) {
         evento.preventDefault();
-        console.log('Executou');
+        var categoria = {};
+
+        $formInputs.each(function (i, input) {
+          var $input = $(input);
+          categoria[$input.attr('name')] = $input.val();
+        });
+        console.log(categoria);
       });
-{#      $wellForm.hide();#}
-      $('#botao-mostrar-form').click(function(){
+
+      {#      $wellForm.hide();#}
+
+      $('#botao-mostrar-form').click(function () {
         $wellForm.slideToggle();
       });
     });
