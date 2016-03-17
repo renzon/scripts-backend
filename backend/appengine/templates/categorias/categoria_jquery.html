@@ -6,25 +6,45 @@
       var $wellForm = $('#well-form');
       var $formCategoria = $('#form-categoria');
       var groups = {'nome': $('#nome-group'), 'codigo': $('#codigo-group')};
+      var helpBlocks = {'nome': $('#nome-help'), 'codigo': $('#codigo-help')};
       var $formInputs = $formCategoria.find('input');
       {#      console.log($formInputs);#}
+
+      function mostrarErros(erros){
+        for (var propriedade in erros) {
+          var msgDeErro = erros[propriedade];
+          groups[propriedade].addClass('has-error');
+          helpBlocks[propriedade].text(msgDeErro);
+        }
+      }
+
+      function limparErros(){
+        for (var p in groups){
+          var $g=groups[p];
+          $g.removeClass('has-error');
+          helpBlocks[p].empty();
+        }
+      }
+
       $formCategoria.submit(function (evento) {
         evento.preventDefault();
+        limparErros();
 
         var categoria = {};
         $formInputs.each(function (i, input) {
           var $input = $(input);
           categoria[$input.attr('name')] = $input.val();
         });
-        for (var propriedade in categoria) {
-          valor = categoria[propriedade];
-          if (valor === '') {
-            groups[propriedade].addClass('has-error');
-          }
-          else {
-            groups[propriedade].removeClass('has-error');
+
+        var erros={};
+        for (var p in categoria){
+          if (categoria[p]===''){
+            erros[p]='Campo obrigatório';
           }
         }
+
+        mostrarErros(erros);
+
 
       });
 
@@ -52,10 +72,12 @@
 
               <label for="nomeInput" class="control-label">Nome </label>
               <input id="nomeInput" type="text" class="form-control" name="nome" value="">
+              <span id="nome-help" class="help-block"></span>
             </div>
             <div id="codigo-group" class="form-group ">
               <label for="codigoInput" class="control-label">Codigo </label>
               <input id="codigoInput" type="text" class="form-control" name="codigo" value="">
+              <span id="codigo-help" class="help-block"></span>
             </div>
 
             <button type="submit" class="btn btn-success">Salvar</button>
