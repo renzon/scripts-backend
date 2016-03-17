@@ -4,13 +4,15 @@
 
     $(document).ready(function () {
       var $wellForm = $('#well-form');
+      $wellForm.hide();
       var $formCategoria = $('#form-categoria');
       var groups = {'nome': $('#nome-group'), 'codigo': $('#codigo-group')};
       var helpBlocks = {'nome': $('#nome-help'), 'codigo': $('#codigo-help')};
       var $formInputs = $formCategoria.find('input');
-      {#      console.log($formInputs);#}
+      var $listaVisualCategorias=$('#lista-categorias');
+      var id = 1;
 
-      function mostrarErros(erros){
+      function mostrarErros(erros) {
         for (var propriedade in erros) {
           var msgDeErro = erros[propriedade];
           groups[propriedade].addClass('has-error');
@@ -18,12 +20,25 @@
         }
       }
 
-      function limparErros(){
-        for (var p in groups){
-          var $g=groups[p];
+      function limparErros() {
+        for (var p in groups) {
+          var $g = groups[p];
           $g.removeClass('has-error');
           helpBlocks[p].empty();
         }
+      }
+
+      function mostrarCategoria(categoria) {
+        var linha='<li>Id: ';
+        linha+=categoria.id;
+        linha+=', Criação: ';
+        linha+=categoria.creation;
+        linha+=', Nome: ';
+        linha+=categoria.nome;
+        linha+=', Código: ';
+        linha+=categoria.codigo;
+        linha+='</li>';
+        $listaVisualCategorias.append(linha);
       }
 
       $formCategoria.submit(function (evento) {
@@ -36,14 +51,23 @@
           categoria[$input.attr('name')] = $input.val();
         });
 
-        var erros={};
-        for (var p in categoria){
-          if (categoria[p]===''){
-            erros[p]='Campo obrigatório';
+        var erros = {};
+
+        var flagErro = false;
+        for (var p in categoria) {
+          if (categoria[p] === '') {
+            flagErro = true;
+            erros[p] = 'Campo obrigatório';
           }
         }
-
-        mostrarErros(erros);
+        if (flagErro) {
+          mostrarErros(erros);
+        } else {
+          categoria.id = id;
+          id++;
+          categoria.creation = '03/16/2016 07:00:11';
+          mostrarCategoria(categoria);
+        }
 
 
       });
@@ -83,6 +107,10 @@
             <button type="submit" class="btn btn-success">Salvar</button>
           </form>
         </div>
+        <h2>Lista de Categorias</h2>
+        <ol id="lista-categorias">
+
+        </ol>
       </div>
     </div>
   </div>
