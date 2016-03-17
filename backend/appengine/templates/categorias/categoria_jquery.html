@@ -4,7 +4,7 @@
 
     $(document).ready(function () {
       var $wellForm = $('#well-form');
-      $wellForm.hide();
+      {#      $wellForm.hide();#}
       var $formCategoria = $('#form-categoria');
       var groups = {'nome': $('#nome-group'), 'codigo': $('#codigo-group')};
       var helpBlocks = {'nome': $('#nome-help'), 'codigo': $('#codigo-help')};
@@ -28,6 +28,10 @@
         }
       }
 
+      function deletar(id) {
+        console.log(id);
+      }
+
       function mostrarCategoria(categoria) {
         var linha = '<li>Id: ';
         linha += categoria.id;
@@ -37,8 +41,17 @@
         linha += categoria.nome;
         linha += ', Código: ';
         linha += categoria.codigo;
+        linha += '<button class="btn btn-danger" ';
+        linha += 'data-id="' + categoria.id + '">';
+        linha += '<i class="glyphicon glyphicon-trash"></i></<button>';
         linha += '</li>';
-        $listaVisualCategorias.append(linha);
+        var $linhaNoDom=$(linha);
+        $linhaNoDom.find('.btn-danger').click(function () {
+          deletar($(this).attr('data-id'));
+        });
+        $listaVisualCategorias.append($linhaNoDom);
+
+
       }
 
       $formCategoria.submit(function (evento) {
@@ -96,12 +109,12 @@
             <div id='nome-group' class="form-group">
 
               <label for="nomeInput" class="control-label">Nome </label>
-              <input id="nomeInput" type="text" class="form-control" name="nome" value="">
+              <input id="nomeInput" type="text" class="form-control" name="nome" value="asdf">
               <span id="nome-help" class="help-block"></span>
             </div>
             <div id="codigo-group" class="form-group ">
               <label for="codigoInput" class="control-label">Codigo </label>
-              <input id="codigoInput" type="text" class="form-control" name="codigo" value="">
+              <input id="codigoInput" type="text" class="form-control" name="codigo" value="sdfsdfsd">
               <span id="codigo-help" class="help-block"></span>
             </div>
 
