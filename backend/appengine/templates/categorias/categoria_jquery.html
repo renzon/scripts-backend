@@ -5,7 +5,7 @@
     $(document).ready(function () {
       var $wellForm = $('#well-form');
       var $formCategoria = $('#form-categoria');
-      var $nomeGroups = $('#nome-group');
+      var groups = {'nome': $('#nome-group'), 'codigo': $('#codigo-group')};
       var $formInputs = $formCategoria.find('input');
       {#      console.log($formInputs);#}
       $formCategoria.submit(function (evento) {
@@ -16,12 +16,16 @@
           var $input = $(input);
           categoria[$input.attr('name')] = $input.val();
         });
-        if (categoria.nome === '') {
-          $nomeGroups.addClass('has-error');
+        for (var propriedade in categoria) {
+          valor = categoria[propriedade];
+          if (valor === '') {
+            groups[propriedade].addClass('has-error');
+          }
+          else {
+            groups[propriedade].removeClass('has-error');
+          }
         }
-        else{
-          $nomeGroups.removeClass('has-error');
-        }
+
       });
 
       {#      $wellForm.hide();#}
@@ -49,7 +53,7 @@
               <label for="nomeInput" class="control-label">Nome </label>
               <input id="nomeInput" type="text" class="form-control" name="nome" value="">
             </div>
-            <div class="form-group ">
+            <div id="codigo-group" class="form-group ">
               <label for="codigoInput" class="control-label">Codigo </label>
               <input id="codigoInput" type="text" class="form-control" name="codigo" value="">
             </div>
