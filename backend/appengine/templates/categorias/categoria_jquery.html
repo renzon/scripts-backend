@@ -9,7 +9,7 @@
       var groups = {'nome': $('#nome-group'), 'codigo': $('#codigo-group')};
       var helpBlocks = {'nome': $('#nome-help'), 'codigo': $('#codigo-help')};
       var $formInputs = $formCategoria.find('input');
-      var $listaVisualCategorias=$('#lista-categorias');
+      var $listaVisualCategorias = $('#lista-categorias');
       var id = 1;
 
       function mostrarErros(erros) {
@@ -29,15 +29,15 @@
       }
 
       function mostrarCategoria(categoria) {
-        var linha='<li>Id: ';
-        linha+=categoria.id;
-        linha+=', Criação: ';
-        linha+=categoria.creation;
-        linha+=', Nome: ';
-        linha+=categoria.nome;
-        linha+=', Código: ';
-        linha+=categoria.codigo;
-        linha+='</li>';
+        var linha = '<li>Id: ';
+        linha += categoria.id;
+        linha += ', Criação: ';
+        linha += categoria.creation;
+        linha += ', Nome: ';
+        linha += categoria.nome;
+        linha += ', Código: ';
+        linha += categoria.codigo;
+        linha += '</li>';
         $listaVisualCategorias.append(linha);
       }
 
@@ -63,6 +63,7 @@
         if (flagErro) {
           mostrarErros(erros);
         } else {
+          $formCategoria[0].reset();
           categoria.id = id;
           id++;
           categoria.creation = '03/16/2016 07:00:11';
