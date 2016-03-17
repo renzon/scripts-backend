@@ -5,18 +5,23 @@
     $(document).ready(function () {
       var $wellForm = $('#well-form');
       var $formCategoria = $('#form-categoria');
+      var $nomeGroups = $('#nome-group');
       var $formInputs = $formCategoria.find('input');
-
       {#      console.log($formInputs);#}
       $formCategoria.submit(function (evento) {
         evento.preventDefault();
-        var categoria = {};
 
+        var categoria = {};
         $formInputs.each(function (i, input) {
           var $input = $(input);
           categoria[$input.attr('name')] = $input.val();
         });
-        console.log(categoria);
+        if (categoria.nome === '') {
+          $nomeGroups.addClass('has-error');
+        }
+        else{
+          $nomeGroups.removeClass('has-error');
+        }
       });
 
       {#      $wellForm.hide();#}
@@ -39,14 +44,14 @@
 
           <form id="form-categoria" action="#" role="form">
 
+            <div id='nome-group' class="form-group">
+
+              <label for="nomeInput" class="control-label">Nome </label>
+              <input id="nomeInput" type="text" class="form-control" name="nome" value="">
+            </div>
             <div class="form-group ">
               <label for="codigoInput" class="control-label">Codigo </label>
               <input id="codigoInput" type="text" class="form-control" name="codigo" value="">
-            </div>
-
-            <div class="form-group ">
-              <label for="nomeInput" class="control-label">Nome </label>
-              <input id="nomeInput" type="text" class="form-control" name="nome" value="">
             </div>
 
             <button type="submit" class="btn btn-success">Salvar</button>
