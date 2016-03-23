@@ -28,9 +28,7 @@
         }
       }
 
-      function deletar(id) {
-        console.log(id);
-      }
+
 
       function mostrarCategoria(categoria) {
         var linha = '<li>Id: ';
@@ -41,13 +39,13 @@
         linha += categoria.nome;
         linha += ', Código: ';
         linha += categoria.codigo;
-        linha += '<button class="btn btn-danger" ';
-        linha += 'data-id="' + categoria.id + '">';
+        linha += '<button class="btn btn-danger">';
         linha += '<i class="glyphicon glyphicon-trash"></i></<button>';
         linha += '</li>';
         var $linhaNoDom=$(linha);
         $linhaNoDom.find('.btn-danger').click(function () {
-          deletar($(this).attr('data-id'));
+          console.log(categoria.id);
+          $linhaNoDom.remove();
         });
         $listaVisualCategorias.append($linhaNoDom);
 
