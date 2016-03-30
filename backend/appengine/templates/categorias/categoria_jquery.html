@@ -52,6 +52,14 @@
 
       }
 
+      function listarCategoriasCallback(resultado){
+        $(resultado).each(function(i, categoria){
+          mostrarCategoria(categoria);
+        });
+      }
+
+      $.get('/categorias/rest').success(listarCategoriasCallback);
+
       $formCategoria.submit(function (evento) {
         evento.preventDefault();
         limparErros();
