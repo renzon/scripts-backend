@@ -77,27 +77,16 @@
         $.post('/categorias/rest/new', categoria).success(function (categoriaSalva) {
           $formCategoria[0].reset();
           mostrarCategoria(categoriaSalva);
+
+        }).error(function(resposta){
+          mostrarErros(resposta.responseJSON);
+        }).always(function(){
           $fieldset.removeAttr('disabled');
           $salvarLoader.fadeOut();
         });
 
         $fieldset.attr('disabled','disabled');
         $salvarLoader.fadeIn();
-
-
-        {#        var erros = {};#}
-        {##}
-        {#        var flagErro = false;#}
-        {#        for (var p in categoria) {#}
-        {#          if (categoria[p] === '') {#}
-        {#            flagErro = true;#}
-        {#            erros[p] = 'Campo obrigatório';#}
-        {#          }#}
-        {#        }#}
-        {#        if (flagErro) {#}
-        {#          mostrarErros(erros);#}
-
-
       });
 
       $wellForm.hide();
