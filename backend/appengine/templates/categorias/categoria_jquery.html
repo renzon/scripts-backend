@@ -9,8 +9,12 @@
       var groups = {'nome': $('#nome-group'), 'codigo': $('#codigo-group')};
       var helpBlocks = {'nome': $('#nome-help'), 'codigo': $('#codigo-help')};
       var $formInputs = $formCategoria.find('input');
+      var $fieldset = $('#fieldset');
       var $listaVisualCategorias = $('#lista-categorias');
       var id = 1;
+
+      var $salvarLoader=$('#salva-loader');
+      $salvarLoader.hide();
 
       function mostrarErros(erros) {
         for (var propriedade in erros) {
@@ -69,10 +73,17 @@
           categoria[$input.attr('name')] = $input.val();
         });
 
+
         $.post('/categorias/rest/new', categoria).success(function (categoriaSalva) {
           $formCategoria[0].reset();
           mostrarCategoria(categoriaSalva);
+          $fieldset.removeAttr('disabled');
+          $salvarLoader.fadeOut();
         });
+
+        $fieldset.attr('disabled','disabled');
+        $salvarLoader.fadeIn();
+
 
         {#        var erros = {};#}
         {##}
@@ -108,20 +119,22 @@
           <h1 class="text-center">Categoria Form</h1>
 
           <form id="form-categoria" action="#" role="form">
+            <fieldset id="fieldset">
+              <div id='nome-group' class="form-group">
 
-            <div id='nome-group' class="form-group">
+                <label for="nomeInput" class="control-label">Nome </label>
+                <input id="nomeInput" type="text" class="form-control" name="nome" value="asdf">
+                <span id="nome-help" class="help-block"></span>
+              </div>
+              <div id="codigo-group" class="form-group ">
+                <label for="codigoInput" class="control-label">Codigo </label>
+                <input id="codigoInput" type="text" class="form-control" name="codigo" value="sdfsdfsd">
+                <span id="codigo-help" class="help-block"></span>
+              </div>
 
-              <label for="nomeInput" class="control-label">Nome </label>
-              <input id="nomeInput" type="text" class="form-control" name="nome" value="asdf">
-              <span id="nome-help" class="help-block"></span>
-            </div>
-            <div id="codigo-group" class="form-group ">
-              <label for="codigoInput" class="control-label">Codigo </label>
-              <input id="codigoInput" type="text" class="form-control" name="codigo" value="sdfsdfsd">
-              <span id="codigo-help" class="help-block"></span>
-            </div>
-
-            <button type="submit" class="btn btn-success">Salvar</button>
+              <button id="salvar-btn" type="submit" class="btn btn-success">Salvar</button>
+              <img id="salva-loader" src="/static/img/ajax.gif" />
+            </fieldset>
           </form>
         </div>
         <h2>Lista de Categorias</h2>
