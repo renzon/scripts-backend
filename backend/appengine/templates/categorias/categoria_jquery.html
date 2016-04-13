@@ -29,7 +29,6 @@
       }
 
 
-
       function mostrarCategoria(categoria) {
         var linha = '<li>Id: ';
         linha += categoria.id;
@@ -42,7 +41,7 @@
         linha += '<button class="btn btn-danger">';
         linha += '<i class="glyphicon glyphicon-trash"></i></<button>';
         linha += '</li>';
-        var $linhaNoDom=$(linha);
+        var $linhaNoDom = $(linha);
         $linhaNoDom.find('.btn-danger').click(function () {
           console.log(categoria.id);
           $linhaNoDom.remove();
@@ -52,8 +51,8 @@
 
       }
 
-      function listarCategoriasCallback(resultado){
-        $(resultado).each(function(i, categoria){
+      function listarCategoriasCallback(resultado) {
+        $(resultado).each(function (i, categoria) {
           mostrarCategoria(categoria);
         });
       }
@@ -70,29 +69,27 @@
           categoria[$input.attr('name')] = $input.val();
         });
 
-        var erros = {};
-
-        var flagErro = false;
-        for (var p in categoria) {
-          if (categoria[p] === '') {
-            flagErro = true;
-            erros[p] = 'Campo obrigatório';
-          }
-        }
-        if (flagErro) {
-          mostrarErros(erros);
-        } else {
+        $.post('/categorias/rest/new', categoria).success(function (categoriaSalva) {
           $formCategoria[0].reset();
-          categoria.id = id;
-          id++;
-          categoria.creation = '03/16/2016 07:00:11';
-          mostrarCategoria(categoria);
-        }
+          mostrarCategoria(categoriaSalva);
+        });
+
+        {#        var erros = {};#}
+        {##}
+        {#        var flagErro = false;#}
+        {#        for (var p in categoria) {#}
+        {#          if (categoria[p] === '') {#}
+        {#            flagErro = true;#}
+        {#            erros[p] = 'Campo obrigatório';#}
+        {#          }#}
+        {#        }#}
+        {#        if (flagErro) {#}
+        {#          mostrarErros(erros);#}
 
 
       });
 
-      {#      $wellForm.hide();#}
+      $wellForm.hide();
 
       $('#botao-mostrar-form').click(function () {
         $wellForm.slideToggle();
