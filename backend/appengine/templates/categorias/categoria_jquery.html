@@ -13,7 +13,7 @@
       var $listaVisualCategorias = $('#lista-categorias');
       var id = 1;
 
-      var $salvarLoader=$('#salva-loader');
+      var $salvarLoader = $('#salva-loader');
       $salvarLoader.hide();
 
       function mostrarErros(erros) {
@@ -48,7 +48,13 @@
         var $linhaNoDom = $(linha);
         $linhaNoDom.find('.btn-danger').click(function () {
           console.log(categoria.id);
-          $linhaNoDom.remove();
+          $linhaNoDom.slideUp();
+          $.post('/categorias/rest/delete', {id: categoria.id}).success(function () {
+            $linhaNoDom.remove();
+          }).error(function () {
+            alert('Não foi possível apagar no momento');
+            $linhaNoDom.slideDown();
+          });
         });
         $listaVisualCategorias.append($linhaNoDom);
 
@@ -78,14 +84,14 @@
           $formCategoria[0].reset();
           mostrarCategoria(categoriaSalva);
 
-        }).error(function(resposta){
+        }).error(function (resposta) {
           mostrarErros(resposta.responseJSON);
-        }).always(function(){
+        }).always(function () {
           $fieldset.removeAttr('disabled');
           $salvarLoader.fadeOut();
         });
 
-        $fieldset.attr('disabled','disabled');
+        $fieldset.attr('disabled', 'disabled');
         $salvarLoader.fadeIn();
       });
 
@@ -122,7 +128,7 @@
               </div>
 
               <button id="salvar-btn" type="submit" class="btn btn-success">Salvar</button>
-              <img id="salva-loader" src="/static/img/ajax.gif" />
+              <img id="salva-loader" src="/static/img/ajax.gif"/>
             </fieldset>
           </form>
         </div>
