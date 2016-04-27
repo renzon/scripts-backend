@@ -8,9 +8,15 @@ categoriaComponentes.directive('categoriaForm', function () {
     scope:{},
     controller:function($scope){
       $scope.categoria={nome:'Notebook', codigo:1};
+      $scope.formVisivelFlag=true;
+
       $scope.salvar=function(){
         console.log($scope.categoria);
-      }
+      };
+
+      $scope.alternarVisibilidade=function(){
+        $scope.formVisivelFlag=!$scope.formVisivelFlag;
+      };
 
     }
   };
