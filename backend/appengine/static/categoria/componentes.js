@@ -10,10 +10,16 @@ categoriaComponentes.directive('categoriaForm', function () {
     controller: function ($scope, CategoriaAPI) {
       $scope.categoria = {nome: 'Notebook', codigo: 1};
       $scope.formVisivelFlag = true;
+      $scope.salvandoFlag=false;
 
       $scope.salvar = function () {
+        $scope.salvandoFlag=true;
         CategoriaAPI.salvar($scope.categoria, function(categoriaDoServidor){
-          console.log(categoriaDoServidor);
+          $scope.categoria = {nome: '', codigo: ''}
+        },function(){
+
+        },function(){
+          $scope.salvandoFlag=false;
         });
       };
 
