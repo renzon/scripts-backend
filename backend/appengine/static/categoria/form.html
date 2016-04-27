@@ -1,4 +1,25 @@
 <div>
-  <h1>Titulo</h1>
-  <h2>Titulo 2</h2>
+  <button id="botao-mostrar-form" class="btn btn-success">Criar Nova Categoria</button>
+  <div id="well-form" class="well">
+    <h1 class="text-center">Categoria Form</h1>
+
+    <form id="form-categoria" ng-submit="salvar()">
+      <fieldset id="fieldset">
+        <div class="form-group">
+
+          <label for="nomeInput" class="control-label">Nome </label>
+          <input type="text" class="form-control" ng-model="categoria.nome">
+          <span class="help-block"></span>
+        </div>
+        <div class="form-group ">
+          <label for="codigoInput" class="control-label">Codigo </label>
+          <input type="text" class="form-control" ng-model="categoria.codigo">
+          <span class="help-block"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <img src="/static/img/ajax.gif">
+      </fieldset>
+    </form>
+  </div>
 </div>
