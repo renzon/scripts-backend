@@ -19,8 +19,21 @@ categoriaService.factory('CategoriaAPI', function ($rootScope) {
             id++;
             if (sucessoCallback !== undefined) {
               sucessoCallback(categoriaDoServidor);
-              
+
             }
+          } else {
+            var erros = {};
+            if (categoria.nome === '') {
+              erros.nome = 'Campo Obrigatório';
+            }
+            if (categoria.codigo === '') {
+              erros.codigo = 'Campo Obrigatório';
+            }
+
+            if (erroCallback !== undefined) {
+              erroCallback(erros);
+            }
+
           }
 
           if (alwaysCallback) {

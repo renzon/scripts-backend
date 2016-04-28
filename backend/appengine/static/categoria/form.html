@@ -5,16 +5,16 @@
 
     <form id="form-categoria" ng-submit="salvar()">
       <fieldset id="fieldset">
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error':erros.nome}" >
 
           <label for="nomeInput" class="control-label">Nome </label>
           <input type="text" class="form-control" ng-model="categoria.nome">
-          <span class="help-block"></span>
+          <span class="help-block">{{ erros.nome }}</span>
         </div>
-        <div class="form-group ">
+        <div class="form-group " ng-class="{'has-error':erros.codigo}">
           <label for="codigoInput" class="control-label">Codigo </label>
           <input type="text" class="form-control" ng-model="categoria.codigo">
-          <span class="help-block"></span>
+          <span class="help-block">{{ erros.codigo }}</span>
         </div>
 
         <button type="submit" class="btn btn-success">Salvar</button>

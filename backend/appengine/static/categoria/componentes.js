@@ -1,5 +1,5 @@
 var categoriaComponentes = angular.module('categoria-componentes',
-                                        ['categoria-service']);
+  ['categoria-service']);
 
 categoriaComponentes.directive('categoriaForm', function () {
   return {
@@ -10,16 +10,19 @@ categoriaComponentes.directive('categoriaForm', function () {
     controller: function ($scope, CategoriaAPI) {
       $scope.categoria = {nome: 'Notebook', codigo: 1};
       $scope.formVisivelFlag = true;
-      $scope.salvandoFlag=false;
+      $scope.salvandoFlag = false;
+      $scope.erros = {};
+    
 
       $scope.salvar = function () {
-        $scope.salvandoFlag=true;
-        CategoriaAPI.salvar($scope.categoria, function(categoriaDoServidor){
+        $scope.salvandoFlag = true;
+        $scope.erros = {};
+        CategoriaAPI.salvar($scope.categoria, function (categoriaDoServidor) {
           $scope.categoria = {nome: '', codigo: ''}
-        },function(){
-
-        },function(){
-          $scope.salvandoFlag=false;
+        }, function (erros) {
+          $scope.erros = erros;
+        }, function () {
+          $scope.salvandoFlag = false;
         });
       };
 
