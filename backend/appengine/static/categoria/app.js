@@ -3,5 +3,17 @@ var categoriaApp = angular.module('categoriaApp',
 
 categoriaApp.controller('CategoriaCtrl',
   function ($scope) {
-    $scope.nome = 'Renzo';
+    $scope.categorias = [
+      {
+        id: 1,
+        nome: 'Tablet',
+        creation: '12/12/12 12:12:12',
+        codigo: 2345678
+      },
+      {
+        id: 2,
+        nome: 'Tablet',
+        creation: '12/12/12 12:12:12',
+        codigo: 2345678
+      }];
   });

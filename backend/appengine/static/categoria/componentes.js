@@ -9,7 +9,7 @@ categoriaComponentes.directive('categoriaForm', function () {
     scope: {},
     controller: function ($scope, CategoriaAPI) {
       $scope.categoria = {nome: 'Notebook', codigo: 1};
-      $scope.formVisivelFlag = true;
+      $scope.formVisivelFlag = false;
       $scope.salvandoFlag = false;
       $scope.erros = {};
     
@@ -35,3 +35,15 @@ categoriaComponentes.directive('categoriaForm', function () {
 });
 
 
+categoriaComponentes.directive('categoriaLinha', function () {
+  return {
+    restrict: 'A',
+    templateUrl: '/static/categoria/linha.html',
+    replace: true,
+    scope: {categoria:'='},
+    controller: function ($scope, CategoriaAPI) {
+
+
+    }
+  };
+});
