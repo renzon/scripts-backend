@@ -12,4 +12,8 @@ categoriaApp.controller('CategoriaCtrl',
     $scope.adicionarCategoria = function (categoriaSalva) {
       $scope.categorias.unshift(categoriaSalva);
     };
+
+    $scope.removerCategoria = function (indice) {
+      $scope.categorias.splice(indice, 1);
+    }
   });

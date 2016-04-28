@@ -2,7 +2,7 @@ var categoriaService = angular.module('categoria-service', []);
 
 categoriaService.factory('CategoriaAPI', function ($rootScope) {
   var id = 1;
-  var delay = 2000;
+  var delay = 1;
 
   return {
     salvar: function (categoria, sucessoCallback, erroCallback, alwaysCallback) {
@@ -58,6 +58,20 @@ categoriaService.factory('CategoriaAPI', function ($rootScope) {
             }];
 
           sucessoCallback(categorias);
+          if (alwaysCallback) {
+            alwaysCallback();
+          }
+
+          $rootScope.$digest();
+        },
+        delay
+      );
+
+    },
+    apagar: function (id,sucessoCallback, erroCallback, alwaysCallback) {
+      setTimeout(function () {
+
+          sucessoCallback();
           if (alwaysCallback) {
             alwaysCallback();
           }

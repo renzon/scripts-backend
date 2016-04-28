@@ -6,13 +6,13 @@ categoriaComponentes.directive('categoriaForm', function () {
     restrict: 'E',
     templateUrl: '/static/categoria/form.html',
     replace: true,
-    scope: {categoriaSalva:'&'},
+    scope: {categoriaSalva: '&'},
     controller: function ($scope, CategoriaAPI) {
       $scope.categoria = {nome: 'Notebook', codigo: 1};
       $scope.formVisivelFlag = false;
       $scope.salvandoFlag = false;
       $scope.erros = {};
-    
+
 
       $scope.salvar = function () {
         $scope.salvandoFlag = true;
@@ -21,8 +21,8 @@ categoriaComponentes.directive('categoriaForm', function () {
 
           $scope.categoria = {nome: '', codigo: ''};
 
-          if ($scope.categoriaSalva!==undefined){
-            $scope.categoriaSalva({categoria:categoriaDoServidor});
+          if ($scope.categoriaSalva !== undefined) {
+            $scope.categoriaSalva({categoria: categoriaDoServidor});
           }
         }, function (erros) {
           $scope.erros = erros;
@@ -45,9 +45,25 @@ categoriaComponentes.directive('categoriaLinha', function () {
     restrict: 'A',
     templateUrl: '/static/categoria/linha.html',
     replace: true,
-    scope: {categoria:'='},
+    scope: {
+      categoria: '=',
+      categoriaApagada:'&'
+    },
     controller: function ($scope, CategoriaAPI) {
+      $scope.visivel = true;
+      $scope.apagar = function () {
+        $scope.visivel = false;
+        CategoriaAPI.apagar($scope.categoria.id, function () {
+              if($scope.categoriaApagada!==undefined){
+                $scope.categoriaApagada();
+              }
+          },
+          function () {
+            alert('Não foi possível apagar no momento, tente novamente mais tarde');
+            $scope.visivel = true;
+          });
 
+      }
 
     }
   };

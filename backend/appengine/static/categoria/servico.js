@@ -2,7 +2,6 @@ var categoriaService = angular.module('categoria-service', []);
 
 categoriaService.factory('CategoriaAPI', function ($http) {
   var id = 1;
-  var delay = 2000;
 
   return {
     salvar: function (categoria, sucessoCallback) {
