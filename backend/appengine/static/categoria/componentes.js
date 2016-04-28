@@ -6,7 +6,7 @@ categoriaComponentes.directive('categoriaForm', function () {
     restrict: 'E',
     templateUrl: '/static/categoria/form.html',
     replace: true,
-    scope: {},
+    scope: {categoriaSalva:'&'},
     controller: function ($scope, CategoriaAPI) {
       $scope.categoria = {nome: 'Notebook', codigo: 1};
       $scope.formVisivelFlag = false;
@@ -18,7 +18,12 @@ categoriaComponentes.directive('categoriaForm', function () {
         $scope.salvandoFlag = true;
         $scope.erros = {};
         CategoriaAPI.salvar($scope.categoria, function (categoriaDoServidor) {
-          $scope.categoria = {nome: '', codigo: ''}
+
+          $scope.categoria = {nome: '', codigo: ''};
+
+          if ($scope.categoriaSalva!==undefined){
+            $scope.categoriaSalva({categoria:categoriaDoServidor});
+          }
         }, function (erros) {
           $scope.erros = erros;
         }, function () {

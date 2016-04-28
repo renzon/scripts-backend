@@ -68,7 +68,7 @@
 <div class="container" ng-app="categoriaApp" ng-controller="CategoriaCtrl">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <categoria-form></categoria-form>
+      <categoria-form categoria-salva="adicionarCategoria(categoria)"></categoria-form>
     </div>
   </div>
   <div class="row">
@@ -88,9 +88,9 @@
         </tr>
         </thead>
         <tbody>
-          <tr categoria-linha="categoria-linha" ng-repeat="cat in categorias" categoria="cat">
+        <tr categoria-linha="categoria-linha" ng-repeat="cat in categorias" categoria="cat">
 
-          </tr>
+        </tr>
         </tbody>
       </table>
     </div>

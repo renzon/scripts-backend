@@ -4,7 +4,12 @@ var categoriaApp = angular.module('categoriaApp',
 categoriaApp.controller('CategoriaCtrl',
   function ($scope, CategoriaAPI) {
     $scope.categorias = [];
-    CategoriaAPI.listar(function(categoriasDoServidor){
-      $scope.categorias=categoriasDoServidor;
+
+    CategoriaAPI.listar(function (categoriasDoServidor) {
+      $scope.categorias = categoriasDoServidor;
     });
+
+    $scope.adicionarCategoria = function (categoriaSalva) {
+      $scope.categorias.unshift(categoriaSalva);
+    };
   });
