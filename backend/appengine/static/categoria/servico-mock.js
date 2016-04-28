@@ -6,11 +6,6 @@ categoriaService.factory('CategoriaAPI', function ($rootScope) {
 
   return {
     salvar: function (categoria, sucessoCallback, erroCallback, alwaysCallback) {
-      // ir no servidor
-
-      // retornando servidor
-
-
       setTimeout(function () {
           if (categoria.nome !== '' && categoria.codigo !== '') {
             var categoriaDoServidor = {'id': id, creation: '12/12/12 12:00:00'};
@@ -36,6 +31,33 @@ categoriaService.factory('CategoriaAPI', function ($rootScope) {
 
           }
 
+          if (alwaysCallback) {
+            alwaysCallback();
+          }
+
+          $rootScope.$digest();
+        },
+        delay
+      );
+
+    },
+    listar: function (sucessoCallback, erroCallback, alwaysCallback) {
+      setTimeout(function () {
+          var categorias = [
+            {
+              id: 1,
+              nome: 'Tablet',
+              creation: '12/12/12 12:12:12',
+              codigo: 2345678
+            },
+            {
+              id: 2,
+              nome: 'Tablet',
+              creation: '12/12/12 12:12:12',
+              codigo: 2345678
+            }];
+
+          sucessoCallback(categorias);
           if (alwaysCallback) {
             alwaysCallback();
           }

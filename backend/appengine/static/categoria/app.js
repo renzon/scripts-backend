@@ -1,19 +1,10 @@
 var categoriaApp = angular.module('categoriaApp',
-  ['categoria-componentes']);
+  ['categoria-componentes', 'categoria-service']);
 
 categoriaApp.controller('CategoriaCtrl',
-  function ($scope) {
-    $scope.categorias = [
-      {
-        id: 1,
-        nome: 'Tablet',
-        creation: '12/12/12 12:12:12',
-        codigo: 2345678
-      },
-      {
-        id: 2,
-        nome: 'Tablet',
-        creation: '12/12/12 12:12:12',
-        codigo: 2345678
-      }];
+  function ($scope, CategoriaAPI) {
+    $scope.categorias = [];
+    CategoriaAPI.listar(function(categoriasDoServidor){
+      $scope.categorias=categoriasDoServidor;
+    });
   });
